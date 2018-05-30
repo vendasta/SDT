@@ -4,7 +4,7 @@ metadata:
  name: sdt-deployment
  namespace: sdt
 spec:
- replicas: 3
+ replicas: 1
  selector:
    matchLabels:
      app: sdt
@@ -15,6 +15,6 @@ spec:
    spec:
      containers:
      - name: sdt
-       image: gcr.io/repcore-prod/sdt:e1d11e4a-5fe5-47c6-9f42-505e9dcf55d7
+       image: gcr.io/sask-dev-talks/sdt:1c56f766-2aff-4624-a74f-798abdfd6a0d
        ports:
        - containerPort: 11000

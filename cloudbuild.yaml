@@ -1,12 +1,23 @@
 steps:
+# build server
 - name: 'gcr.io/cloud-builders/go'
   args: ['install', './server']
   env: ['PROJECT_ROOT=github.com/$PROJECT_ID/SDT']
-  id: 'go-install'
+  id: 'go-install-server'
 - name: 'gcr.io/cloud-builders/docker'
   args: ['build', '--file=./Dockerfile', '--tag=gcr.io/$PROJECT_ID/sdt:$BUILD_ID', '.']
-  waitFor: ['go-install']
-images: ['gcr.io/$PROJECT_ID/sdt:$BUILD_ID']
+  waitFor: ['go-install-server']
+
+# build client server
+- name: 'gcr.io/cloud-builders/go'
+  args: ['install', './client']
+  env: ['PROJECT_ROOT=github.com/$PROJECT_ID/SDT']
+  id: 'go-install-client'
+- name: 'gcr.io/cloud-builders/docker'
+  args: ['build', '--file=./Dockerfile', '--tag=gcr.io/$PROJECT_ID/sdt-client:$BUILD_ID', '.']
+  waitFor: ['go-install-client']
+
+images: ['gcr.io/$PROJECT_ID/sdt:$BUILD_ID', 'gcr.io/$PROJECT_ID/sdt-client:$BUILD_ID']
 timeout: 1200s
 options:
   machineType: N1_HIGHCPU_8

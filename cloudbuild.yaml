@@ -2,7 +2,7 @@ steps:
 # build server
 - name: 'gcr.io/cloud-builders/go'
   args: ['install', './server']
-  env: ['PROJECT_ROOT=github.com/$PROJECT_ID/SDT']
+  env: ['PROJECT_ROOT=github.com/vendasta/SDT']
   id: 'go-install-server'
 - name: 'gcr.io/cloud-builders/docker'
   args: ['build', '--file=./Dockerfile', '--tag=gcr.io/$PROJECT_ID/sdt:$BUILD_ID', '.']

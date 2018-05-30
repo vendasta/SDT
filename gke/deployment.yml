@@ -16,7 +16,7 @@ spec:
      terminationGracePeriodSeconds: 5
      containers:
      - name: sdt
-       image: gcr.io/sask-dev-talks/sdt:73acb3ba-b209-4ca3-bad6-867fd627219a
+       image: gcr.io/sask-dev-talks/sdt:final
        ports:
        - containerPort: 11000
        livenessProbe:

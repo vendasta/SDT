@@ -18,3 +18,19 @@ spec:
        image: gcr.io/sask-dev-talks/sdt:1c56f766-2aff-4624-a74f-798abdfd6a0d
        ports:
        - containerPort: 11000
+       livenessProbe:
+        httpGet:
+          path: /healthz
+          port: 11000
+        initialDelaySeconds: 3
+        periodSeconds: 3
+       readinessProbe:
+        httpGet:
+          path: /healthz
+          port: 11000
+        initialDelaySeconds: 3
+        periodSeconds: 3
+       resources:
+        limits:
+          memory: "128Mi"
+          cpu: "250m"

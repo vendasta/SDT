@@ -1,0 +1,43 @@
+livenessProbe:
+  httpGet:
+    path: /healthz
+    port: 11000
+  initialDelaySeconds: 3
+  periodSeconds: 3
+readinessProbe:
+  httpGet:
+    path: /healthz
+    port: 11000
+  initialDelaySeconds: 3
+  periodSeconds: 3
+
+
+app := sdt.NewApplication()
+
+mux.HandleFunc("/healthz", func(writer http.ResponseWriter, request *http.Request) {
+    if app.Ready() {
+        err := app.Ping()
+        if err != nil {
+            http.Error(writer, err.Error(), http.StatusInternalServerError)
+            return
+        } else {
+            fmt.Fprint(writer, "OK")
+        }
+    } else {
+        http.Error(writer, "Not Ready", http.StatusBadRequest)
+        return
+    }
+})
+
+end := make(chan os.Signal)
+signal.Notify(end, syscall.SIGINT, syscall.SIGTERM)
+
+go func() {
+    srv.ListenAndServe()
+}()
+
+<-end
+
+ctx, cancel := context.WithTimeout(context.Background(), time.Second*5)
+defer cancel()
+srv.Shutdown(ctx)

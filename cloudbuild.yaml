@@ -8,7 +8,7 @@ steps:
   args: ['build', '--file=./Dockerfile', '--tag=gcr.io/$PROJECT_ID/sdt:$BUILD_ID', '.']
   waitFor: ['go-install-server']
 
-images: ['gcr.io/$PROJECT_ID/sdt:$BUILD_ID', 'gcr.io/$PROJECT_ID/sdt-client:$BUILD_ID']
+images: ['gcr.io/$PROJECT_ID/sdt:$BUILD_ID']
 timeout: 1200s
 options:
   machineType: N1_HIGHCPU_8

@@ -1,0 +1,12 @@
+steps:
+- name: 'gcr.io/cloud-builders/go'
+  args: ['install', './server']
+  env: ['PROJECT_ROOT=github.com/$PROJECT_ID/SDT']
+  id: 'go-install'
+- name: 'gcr.io/cloud-builders/docker'
+  args: ['build', '--file=./Dockerfile', '--tag=gcr.io/$PROJECT_ID/SDT:$BUILD_ID', '.']
+  waitFor: ['go-install']
+images: ['gcr.io/$PROJECT_ID/SDT:$BUILD_ID']
+timeout: 1200s
+options:
+  machineType: N1_HIGHCPU_8

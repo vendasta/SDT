@@ -13,9 +13,10 @@ spec:
      labels:
        app: sdt
    spec:
+     terminationGracePeriodSeconds: 5
      containers:
      - name: sdt
-       image: gcr.io/sask-dev-talks/sdt:0be2bdd5-b7e0-4d21-9f92-9b7868b58400
+       image: gcr.io/sask-dev-talks/sdt:73acb3ba-b209-4ca3-bad6-867fd627219a
        ports:
        - containerPort: 11000
        livenessProbe:

@@ -29,7 +29,7 @@ func main() {
 	})
 
 	mux.HandleFunc("/", func(writer http.ResponseWriter, request *http.Request) {
-		fmt.Fprintf(writer, "%d", Fibonacci(20))
+		fmt.Fprintf(writer, "%d", Fibonacci(35))
 	})
 
 	// subscribe to SIGINT signals

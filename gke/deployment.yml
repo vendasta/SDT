@@ -15,7 +15,7 @@ spec:
    spec:
      containers:
      - name: sdt
-       image: gcr.io/sask-dev-talks/sdt:1c56f766-2aff-4624-a74f-798abdfd6a0d
+       image: gcr.io/sask-dev-talks/sdt:0be2bdd5-b7e0-4d21-9f92-9b7868b58400
        ports:
        - containerPort: 11000
        livenessProbe:
